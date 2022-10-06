@@ -26,3 +26,8 @@ bin
 .classpath
 .project
 target
+
+
+.DS_Store
+.vscode/
+setup/.DS_Store
