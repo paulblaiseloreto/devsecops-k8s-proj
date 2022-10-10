@@ -1,6 +1,8 @@
 pipeline {
   agent any
-
+  environment {
+    SHORT_COMMIT = "${GIT_COMMIT[0..7]}"
+  }
   stages {
       stage('Build Artifact') {
             steps {
@@ -26,8 +28,8 @@ pipeline {
             withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
               sh 'hostname'
               sh 'printenv'
-              sh 'docker build -t mrpaulblaise/numeric-app:""${GIT_COMMIT[0..7]}"" .'
-              sh 'docker push mrpaulblaise/numeric-app:""${GIT_COMMIT[0..7]}""'
+              sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
+              sh 'docker push mrpaulblaise/numeric-app:""$SHORT_COMMIT""'
             }
           }
         }
