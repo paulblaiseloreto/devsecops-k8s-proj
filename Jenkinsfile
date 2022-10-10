@@ -20,5 +20,15 @@ pipeline {
               }
             }
         } 
+
+        stage('Docker Build image and push') {
+          steps {
+            withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+              sh 'printenv'
+              sh 'docker-build -t mrpaulblaise/numeric-app:""$GIT_COMMIT"" .'
+              sh 'docker push mrpaulblaise/numberic-app:""$GIT_COMMIT""'
+            }
+          }
+        }
     }
 }
