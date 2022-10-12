@@ -31,7 +31,11 @@ pipeline {
                 sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
                 sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
               }
-          }
+            }
+            post {
+                unstable(message: "${STAGE_NAME} is unstable")
+            }
+
         }
 
         stage('Kubernetes Deployment - DEV') {
