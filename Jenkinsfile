@@ -22,7 +22,7 @@ pipeline {
               }
             }
         } 
-        //sadfsdf 
+        //sadfsdf dsaf
         stage('Docker Build image and push') {
             withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
               sh 'hostname'
