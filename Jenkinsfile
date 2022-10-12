@@ -34,8 +34,10 @@ pipeline {
                     sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
                   } 
               } catch (err) {
-                    //unstable(message: "${STAGE_NAME} is unstable")
-                    throw err
+                //comment if you want to test the absence of "unstable" func,
+                //throw err should stop the other stages except for the ones inside the "finally" call
+                unstable(message: "${STAGE_NAME} is unstable")
+                throw err
               } finally {
                   stage('mimic work scripted pipeline') {
                   test()         
