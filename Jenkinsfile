@@ -27,9 +27,16 @@ pipeline {
           steps {
             script {
                 try {
-                  deploytoDockerReg()
+                  withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+                  sh 'echo ${STAGE_NAME}'
+                  sh 'printenv'
+                  sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
+                  sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
+              } catch (err) {
+                    unstable(message: "${STAGE_NAME} is unstable")
+                    throw err
               } finally {
-                stage('mimic work scripted pipeline') {
+                  stage('mimic work scripted pipeline') {
                   test()         
                 }
               } 
@@ -50,27 +57,9 @@ pipeline {
     
     
 }
-
-def deploytoDockerReg () {
-  steps {
-    script {
-      try {
-        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-          sh 'echo ${STAGE_NAME}'
-          sh 'printenv'
-          sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
-          sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
-        }
-    } catch (err) {
-        unstable(message: "${STAGE_NAME} is unstable")
-        throw err
-    }
-    }
-  }
-  
-} 
-
     
 def test () {
+  stage ('Forced Success')) {
       echo "Force Success!"
-    }
+  }
+}
