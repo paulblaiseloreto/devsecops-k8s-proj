@@ -34,7 +34,7 @@ pipeline {
                     sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
                   } 
               } catch (err) {
-                    unstable(message: "${STAGE_NAME} is unstable")
+                    //unstable(message: "${STAGE_NAME} is unstable")
                     throw err
               } finally {
                   stage('mimic work scripted pipeline') {
