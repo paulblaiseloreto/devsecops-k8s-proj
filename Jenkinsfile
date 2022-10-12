@@ -30,9 +30,7 @@ pipeline {
                   deploytoDockerReg()
               } finally {
                 stage('mimic work scripted pipeline') {
-                  steps {
-                      test()         
-                  }
+                  test()         
                 }
               } 
             }
