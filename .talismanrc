@@ -1,4 +1,5 @@
 fileignoreconfig:
 - filename: sec_files/file3
   checksum: 93d1a915114c5b96c6138b892b2c5d400a3d4be54f5b4453c3d206641b649d80
-
+- filename: setup/vm-install-script/install-script.sh
+  checksum: f33a475497074b83887222df93066eb91f917f1acdafeed55ad6d1f4790483d4
