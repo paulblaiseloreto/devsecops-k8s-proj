@@ -36,9 +36,9 @@ pipeline {
                 } catch (err) {
                     unstable(message: "${STAGE_NAME} is unstable")
                     throw err
-              } finally (
-                test()
-              )
+              } finally {
+                  test()
+              } 
             }
             
           }
@@ -52,10 +52,11 @@ pipeline {
             }
           }
         }
-
-
-    }
+        
     def test () {
       echo "Force Success!"
     }
+
+    }
+    
 }
