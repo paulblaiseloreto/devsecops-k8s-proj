@@ -24,8 +24,8 @@ pipeline {
         } 
 
         stage('Docker Build image and push') {
-          script {
-            steps {
+          steps {
+            script {
                 try {
                   withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
                     sh 'echo ${STAGE_NAME}'
