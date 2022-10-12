@@ -33,7 +33,9 @@ pipeline {
               }
             }
             post {
-                unstable(message: "${STAGE_NAME} is unstable")
+              failure {
+                  unstable(message: "${STAGE_NAME} is unstable")
+              }           
             }
 
         }
