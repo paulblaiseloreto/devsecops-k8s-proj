@@ -56,8 +56,9 @@ pipeline {
    
 
     }
-    def test () {
-      echo "Force Success!"
-    }
+    
     
 }
+def test () {
+      echo "Force Success!"
+    }
