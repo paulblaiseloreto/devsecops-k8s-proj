@@ -59,7 +59,7 @@ pipeline {
 }
     
 def test () {
-  stage ('Forced Success')) {
+  stage ('Forced Success') {
       echo "Force Success!"
   }
 }
