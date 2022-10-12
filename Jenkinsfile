@@ -24,7 +24,6 @@ pipeline {
         } 
         try {
           stage('Docker Build image and push') {
-            
               steps {
                 withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
                   sh 'hostname'
@@ -33,8 +32,6 @@ pipeline {
                   sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
                 }
             }
-            
-            
           }
         } catch (err) {
                 unstable(message: "${STAGE_NAME} is unstable")
