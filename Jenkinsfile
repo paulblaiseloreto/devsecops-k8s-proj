@@ -24,20 +24,20 @@ pipeline {
         } 
 
         stage('Docker Build image and push') {
-            steps {
-              withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-                sh 'hostname'
-                sh 'printenv'
-                sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
-                sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
+          script {
+            try {
+              steps {
+                withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+                  sh 'echo ${STAGE_NAME}'
+                  sh 'printenv'
+                  sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
+                  sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
               }
             }
-            post {
-              failure {
-                  unstable(message: "${STAGE_NAME} is unstable")
-              }           
+            } catch (err) {
+                unstable(message: "${STAGE_NAME} is unstable")
             }
-
+          }
         }
 
         stage('Kubernetes Deployment - DEV') {
