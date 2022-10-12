@@ -52,7 +52,8 @@ pipeline {
 }
 
 def deploytoDockerReg () {
-  script {
+  steps {
+    script {
       try {
       stage ('Deploy to Docker') {
         steps {
@@ -70,7 +71,9 @@ def deploytoDockerReg () {
         unstable(message: "${STAGE_NAME} is unstable")
         throw err
     }
+    }
   }
+  
   
 } 
 
