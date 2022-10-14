@@ -36,8 +36,9 @@ pipeline {
               } catch (err) {
                 //comment if you want to test the absence of "unstable" func,
                 //throw err should stop the other stages except for the ones inside the "finally" call
-                unstable(message: "${STAGE_NAME} is unstable")
-                throw err
+                //unstable(message: "${STAGE_NAME} is unstable")
+                sh "exit 1" //force to fail x the stage
+                throw err //failes the pipeline only
               } finally {
                   stage('mimic work scripted pipeline') {
                   test()         
