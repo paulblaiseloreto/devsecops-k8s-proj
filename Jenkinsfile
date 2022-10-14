@@ -31,7 +31,7 @@ pipeline {
                     sh 'echo ${STAGE_NAME}'
                     sh 'printenv'
                     sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
-                    sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
+                    //sh 'docker push mrpaulblaise/numeric-ap:""$SHORT_COMMIT""'
                     sh "exit 128"
                   } 
               } catch (err) {
