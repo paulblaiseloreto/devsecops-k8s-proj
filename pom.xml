@@ -66,9 +66,9 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-			<!-- Dependency Check Plugin --> 
-				<groupID>org.owasp</groupID>
+			<!-- Dependency Check Plugin -->
+			<plugin> 
+				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
 				<version>6.1.6</version>
 				<configuration>
