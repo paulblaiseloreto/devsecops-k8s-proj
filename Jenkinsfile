@@ -38,24 +38,20 @@ pipeline {
           }
         }
 
-    //    stage('Vulnerability Scan -  Docker') {
-     //     steps {
-     //       sh "mvn dependency-check:check"
-     //     }
-      //    post {
-      //      always {
-      //        dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-      //      }
-      //    }
-      //
-      //
-     //   }
+       stage('Vulnerability Scan -  Docker') {
+         steps {
+           sh "mvn dependency-check:check"
+         }
+         post {
+           always {
+             dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+           }
+         }
+       }
 
         stage('Docker Build image and push') {
           steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-                sh 'echo ${STAGE_NAME}'
-                sh 'printenv'
                 sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
                 sh 'docker push mrpaulblaise/numeric-app:""$SHORT_COMMIT""'
                 } 
@@ -73,10 +69,4 @@ pipeline {
     }
     
     
-}
-    
-def test () {
-  stage ('Forced Success') {
-      echo "Force Success!"
-  }
 }
