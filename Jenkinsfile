@@ -59,7 +59,7 @@ pipeline {
         stage('Docker Build image and push') {
           steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-                sh 'docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
+                sh 'sudo docker build -t mrpaulblaise/numeric-app:""$SHORT_COMMIT"" .'
                 sh 'docker push mrpaulblaise/numeric-app:""$SHORT_COMMIT""'
                 } 
           }
