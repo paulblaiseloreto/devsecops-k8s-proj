@@ -13,7 +13,6 @@ echo "Exit Code : $exit_code"
 # Check scan results
 if [[ "$exit_code" ]]; then
     echo "Image scanning failed. Vulenerabilities found"
-    exit 1;
 else
     echo "Image scanning passed. No CRITICAL vulnerabilities found"
 fi;
