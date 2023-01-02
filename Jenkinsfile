@@ -5,7 +5,7 @@ pipeline {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
-    imageName = "mrpaulblaise/numeric-app:${$SHORT_COMMIT}"
+    imageName = "mrpaulblaise/numeric-app:${SHORT_COMMIT}"
     applicationURL="http://devsecopspaul-demo.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
   }
