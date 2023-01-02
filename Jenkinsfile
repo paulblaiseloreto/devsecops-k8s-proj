@@ -2,7 +2,14 @@ pipeline {
   agent any
   environment {
     SHORT_COMMIT = "${GIT_COMMIT[0..7]}"
+    deploymentName = "devsecops"
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
+    imageName = "mrpaulblaise/numeric-app:${$SHORT_COMMIT}"
+    applicationURL="http://devsecopspaul-demo.eastus.cloudapp.azure.com"
+    applicationURI="/increment/99"
   }
+  
   stages {
       stage('Build Artifact') {
             steps {
@@ -68,8 +75,15 @@ pipeline {
         stage('Kubernetes Deployment - DEV') {
           steps {
             withKubeConfig([credentialsId: 'kubeconfig']) {
-              sh "sed -i 's#replace#mrpaulblaise/numeric-app:${SHORT_COMMIT}#g' k8s_deployment_service.yaml"
-              sh "kubectl apply -f k8s_deployment_service.yaml"
+              sh "bash k8s-deployment.sh"
+            }
+          }
+        }
+
+        stage('Kubernetes Deployment - Rollout Status') {
+          steps {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh 'bash k8s-deployment-rollout-status.sh'
             }
           }
         }
