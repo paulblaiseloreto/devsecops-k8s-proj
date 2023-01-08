@@ -22,7 +22,7 @@ spec:
       containers:
       - image: replace
         name: devsecops-container
-        volumenMounts:
+        volumeMounts:
         - mountPath: /tmp
           name: vol
         securityContext:
